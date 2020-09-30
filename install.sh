@@ -1,6 +1,51 @@
 cd ~
-version=5.2.4
-os=ubuntu20.04
+
+vv=$(lsb_release -rs)
+case $vv in
+16.04)
+	os=ubuntu16.04
+	break
+	;;
+18.04)
+	os=ubuntu18.04
+	break
+	;;
+20.04)
+	os=ubuntu20.04
+	break
+	;;
+*)
+  echo Unsupported version.
+  echo Choose ubuntu version
+  echo 0 - Ubuntu 16.04
+  echo 1 - Ubuntu 18.04
+  echo 2 - Ubuntu 20.04
+  read INPUT_STRING
+  case $INPUT_STRING in
+  0)
+  	os=ubuntu16.04
+  	break
+  	;;
+  1)
+  	os=ubuntu18.04
+  	break
+  	;;
+  2)
+  	os=ubuntu20.04
+  	break
+  	;;
+  *)
+  break
+	;;
+esac
+esac
+
+echo "Enter swift version (5.2.4, 5.3, ...)"
+read version
+
+echo Will install swift $version on $os
+echo Press enter to continue...
+read
 
 # removing dots from os for url (ubuntu16.04 will be ubuntu1604)
 os2="${os//./}"
