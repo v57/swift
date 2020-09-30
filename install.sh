@@ -4,15 +4,12 @@ vv=$(lsb_release -rs)
 case $vv in
 16.04)
 	os=ubuntu16.04
-	break
 	;;
 18.04)
 	os=ubuntu18.04
-	break
 	;;
 20.04)
 	os=ubuntu20.04
-	break
 	;;
 *)
   echo Unsupported version.
@@ -24,18 +21,14 @@ case $vv in
   case $INPUT_STRING in
   0)
   	os=ubuntu16.04
-  	break
   	;;
   1)
   	os=ubuntu18.04
-  	break
   	;;
   2)
   	os=ubuntu20.04
-  	break
   	;;
   *)
-  break
 	;;
 esac
 esac
