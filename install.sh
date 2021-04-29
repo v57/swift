@@ -54,7 +54,7 @@ then
   echo "Using local archive"
 else
   # installing dependencies
-  apt-get install clang libicu-dev libcurl4-openssl-dev libpython2.7 pkg-config uuid-dev openssl libssl-dev -y
+  apt install clang libicu-dev libcurl4-openssl-dev libpython2.7 pkg-config uuid-dev openssl libssl-dev -y
   # creating directory
   mkdir -p swift/$os
   # downloading swift archive
@@ -68,3 +68,9 @@ fi
 rsync -avh $version/usr /
 # printing swift version
 swift --version
+
+echo ''
+echo 'Install apt packages using'
+echo 'sudo apt install clang libicu-dev libcurl4-openssl-dev libpython2.7 pkg-config uuid-dev openssl libssl-dev -y'
+echo 'And run this command to move swift binaries to /usr/bin'
+echo 'sudo rsync -avh swift/$os/$version/usr /'
