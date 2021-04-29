@@ -37,7 +37,7 @@ case $vv in
 esac
 esac
 
-echo "Enter swift version (5.2.4, 5.3, ...)"
+echo "Enter swift version (5.2.4, 5.4, ...)"
 read version
 
 echo Will install swift $version on $os
@@ -50,18 +50,21 @@ os2="${os//./}"
 # if version is already downloaded so we don't need to do anything
 if [ -e "swift/$os/$version.tar.gz" ]
 then
+  cd swift/$os
   echo "Using local archive"
 else
   # installing dependencies
   apt-get install clang libicu-dev libcurl4-openssl-dev libpython2.7 pkg-config uuid-dev openssl libssl-dev -y
   # creating directory
-  mkdir -p "swift/$os"
+  mkdir -p swift/$os
   # downloading swift archive
-  wget -O "swift/$os/$version.tar.gz" "https://swift.org/builds/swift-$version-release/$os2/swift-$version-RELEASE/swift-$version-RELEASE-$os.tar.gz"
+  wget -O swift/$os/$version.tar.gz https://swift.org/builds/swift-$version-release/$os2/swift-$version-RELEASE/swift-$version-RELEASE-$os.tar.gz
   # extracting swift archive
-  tar xzf "swift/$os/$version.tar.gz"
+  cd swift/$os
+  tar -zxvf "$version.tar.gz"
+  mv swift-$version-RELEASE-$os $version
 fi
 # moving swift archive to /usr directory
-rsync -avh "swift/$os/$version/usr" /
+rsync -avh $version/usr /
 # printing swift version
 swift --version
